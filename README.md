@@ -9,7 +9,7 @@ vue.js로 작성된 gs 뷰입니다.
 ```bash
 git clone https://SeoYoungeun@bitbucket.org/wefunding-logistics/gs-front.git
 
-cd starter-kit
+cd gs-front
 
 npm install
 
