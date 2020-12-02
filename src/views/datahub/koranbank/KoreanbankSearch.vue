@@ -11,6 +11,7 @@
             <datepicker :minimumView="'month'" :maximumView="'month'"></datepicker>
         </template> -->
             <flat-pickr :config="configFromdateTimePicker" v-model="fromDate" placeholder="From Date" @on-change="onFromChange" />
+            &nbsp;
             <flat-pickr :config="configTodateTimePicker" v-model="toDate" placeholder="To Date" @on-change="onToChange" />
         </div>
         <br>

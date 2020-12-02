@@ -18,6 +18,7 @@
 
       <router-link tag="div" to="/" class="vx-logo cursor-pointer mx-auto flex items-center">
         <logo class="w-10 mr-4 fill-current text-primary" />
+        <!-- <img src="../../../assets/images/logo/logo_wef.png"/> -->
         <span class="vx-logo-text text-primary">Vuexy</span>
       </router-link>
 
@@ -46,6 +47,11 @@ export default {
     navbarType: {
       type: String,
       required: true
+    }
+  },
+  data () {
+    return {
+      imgSrc: '../../../public/logo_wef.png'
     }
   },
   components: {

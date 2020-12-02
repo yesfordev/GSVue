@@ -1,3 +1,7 @@
 <template>
-	<h4>You are in home.</h4>
+	<div>
+		<h4>Wefunding DataHub.</h4>
+		<br>
+		<h5>year 2020, made by youngeun Seo</h5>
+	</div>
 </template>
