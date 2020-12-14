@@ -70,7 +70,112 @@ const router = new Router({
                   pageTitle: 'Real GDP Growth (경제성장률)',
                   rule: 'editor'
                 }
-              }
+              },
+              {
+                path: '/datahub/koreanbank/3',
+                name: 'Inflation',
+                component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Data Hub' },
+                    { title: '한국은행 지표 관리' },
+                    { title: 'Inflation (소비자물가등락률)', active: true }
+                  ],
+                  pageTitle: 'Inflation (소비자물가등락률)',
+                  rule: 'editor'
+                }
+              },
+              {
+                path: '/datahub/koreanbank/4',
+                name: 'Private-Consumption-Growth',
+                component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Data Hub' },
+                    { title: '한국은행 지표 관리' },
+                    { title: 'Private Consumption Growth (민간소비증감률)', active: true }
+                  ],
+                  pageTitle: 'Private Consumption Growth (민간소비증감률)',
+                  rule: 'editor'
+                }
+              },
+              {
+                path: '/datahub/koreanbank/5',
+                name: 'Exchange-Rate',
+                component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Data Hub' },
+                    { title: '한국은행 지표 관리' },
+                    { title: 'Exchange Rate (KRW/USD) (평균환율-원화의 대미달러)', active: true }
+                  ],
+                  pageTitle: 'Exchange Rate (KRW/USD) (평균환율-원화의 대미달러)',
+                  rule: 'editor'
+                }
+              },
+              // {
+              //   path: '/datahub/koreanbank/6',
+              //   name: 'Import',
+              //   component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+              //   meta: {
+              //     breadcrumb: [
+              //       { title: 'Home', url: '/' },
+              //       { title: 'Data Hub' },
+              //       { title: '한국은행 지표 관리' },
+              //       { title: 'Import (수입)', active: true }
+              //     ],
+              //     pageTitle: 'Import (수입)',
+              //     rule: 'editor'
+              //   }
+              // },
+              // {
+              //   path: '/datahub/koreanbank/7',
+              //   name: 'Export',
+              //   component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+              //   meta: {
+              //     breadcrumb: [
+              //       { title: 'Home', url: '/' },
+              //       { title: 'Data Hub' },
+              //       { title: '한국은행 지표 관리' },
+              //       { title: 'Export (수출)', active: true }
+              //     ],
+              //     pageTitle: 'Export (수출)',
+              //     rule: 'editor'
+              //   }
+              // },
+              {
+                path: '/datahub/koreanbank/8',
+                name: 'Population',
+                component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Data Hub' },
+                    { title: '한국은행 지표 관리' },
+                    { title: 'Population (추계인구)', active: true }
+                  ],
+                  pageTitle: 'Population (추계인구)',
+                  rule: 'editor'
+                }
+              },
+              {
+                path: '/datahub/koreanbank/9',
+                name: 'Unemployment',
+                component: () => import('./views/datahub/koranbank/Koreanbank.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Data Hub' },
+                    { title: '한국은행 지표 관리' },
+                    { title: 'Unemployment (실업률)', active: true }
+                  ],
+                  pageTitle: 'Unemployment (실업률)',
+                  rule: 'editor'
+                }
+              },
             ],
         },
     // =============================================================================

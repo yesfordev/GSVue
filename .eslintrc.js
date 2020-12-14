@@ -9,7 +9,8 @@ module.exports = {
     'eslint:recommended'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': "off",
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // Best Practices
@@ -47,7 +48,7 @@ module.exports = {
     'nonblock-statement-body-position': 'error',
     'object-property-newline': ["error", { "allowAllPropertiesOnSameLine": true }],
     'quote-props': ['error', 'consistent'],
-    'quotes': ['error', 'single'],
+    // 'quotes': ['error', 'single'],
     'semi': ['error', 'never'],
     'semi-spacing': 'error',
     'space-before-blocks': 'error',

@@ -20,12 +20,9 @@ module.exports = {
         chunks: 'all'
       }
     }
+  },
+  devServer: {
+    port: process.env.VUE_APP_PORT || 3000
   }
-  // devServer: {
-  //   overlay: {
-  //     warnings: true,
-  //     errors: true
-  //   }
-  // }
 }
 
