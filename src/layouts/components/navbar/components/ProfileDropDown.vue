@@ -9,7 +9,6 @@
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
       <div class="text-right leading-tight hidden sm:block">
         <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
-        <!-- <small>Available</small> -->
       </div>
       <!-- <div class="con-img ml-3">
         <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
@@ -61,12 +60,22 @@
 export default {
   computed: {
     activeUserInfo () {
-      return this.$store.state.AppActiveUser
+      return this.$store.state.AppActiveUser;
+      // return localStorage.getItem("user").toString;
+    //   return this.$store.state
+    // }
     }
   },
   methods: {
     logout () {
-      localStorage.removeItem('userInfo')
+      // localStorage.removeItem('userInfo')
+      // console.log(this.$store.state.AppActiveUser.displayName)
+      // console.log(JSON.parse(localStorage.getItem("user")))
+      localStorage.removeItem("user");
+      this.$cookie.delete('token');
+      this.$store.commit('resetState');
+      // localStorage.clear();
+      sessionStorage.clear();
 
       // This is just for demo Purpose. If user clicks on logout -> redirect
       this.$router.push('/pages/login').catch(() => {})

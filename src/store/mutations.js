@@ -6,7 +6,12 @@
   Author: Pixinvent
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-
+const getDefaultState = () => {
+  return {
+    items: [],
+    status: 'empty'
+  }
+}
 
 const mutations = {
 
@@ -115,6 +120,15 @@ const mutations = {
     // Store data in localStorage
     localStorage.setItem("userInfo", JSON.stringify(userInfo))
   },
+  UPDATE_USER(state, payload) {
+    let user = JSON.parse(localStorage.getItem("user"))
+
+    state.AppActiveUser.displayName = payload;
+    user
+  },
+  resetState(state) {
+    Object.assign(state, getDefaultState());
+  }
 }
 
 export default mutations

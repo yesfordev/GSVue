@@ -118,13 +118,11 @@ export default{
           // if(res.data.status) {
           console.log("token: ", res.data.data);
           this.$cookie.set('token', res.data.data);
-          // } else {
-          //   //팝업 띄우기
-          // }
+          sessionStorage.setItem('token', res.data.data);
+          this.$router.push({path: '/', name: 'home'}).catch(() => {})
         })
-        .catch((error) => {
+        .catch((error) => { // 팝업 띄우기
           console.log(error);
-          // console.log(error.response.request._response);
           this.popupActive = true;
         });
     }

@@ -92,7 +92,9 @@ export default {
         let areaString = info.selected.join(',');
         console.log("areaString: ", areaString);
         return this.$http
-        .get(`${process.env.VUE_APP_BASE_URL}/front/statisticSearch/multipleArea?masterId=${this.masterId}&itemName1=${areaString}&startTime=${info.fromTime}&endTime=${info.toTime}`)
+        .get(`${process.env.VUE_APP_BASE_URL}/front/statisticSearch/multipleArea?masterId=${this.masterId}&itemName1=${areaString}&startTime=${info.fromTime}&endTime=${info.toTime}`, {
+          'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+        })
         .then((res) => {
           this.statisticSearch = res.data;
           console.log("statisticSearch: ", this.statisticSearch);
@@ -105,7 +107,9 @@ export default {
       } else { //나라 조건이 없을 때
       console.log("no area");
         return this.$http
-        .get(`${process.env.VUE_APP_BASE_URL}/front/statisticSearch?masterId=${this.masterId}&startTime=${info.fromTime}&endTime=${info.toTime}`)
+        .get(`${process.env.VUE_APP_BASE_URL}/front/statisticSearch?masterId=${this.masterId}&startTime=${info.fromTime}&endTime=${info.toTime}`, {
+          'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+        })
         .then((res) => {
           this.statisticSearch = res.data;
           console.log("statisticSearch: ", this.statisticSearch);
@@ -167,14 +171,6 @@ export default {
         labels: labels,
         datasets: datasets
       }
-
-
-
-      // this.data.options.title.text = this.masterDetailResult[0].statName;
-      // this.options.title.text = this.statName;
-      // console.log(this.options.title.text);
-
-      // console.log("data: ",this.data.datasets);
     }
   },
   async created() {

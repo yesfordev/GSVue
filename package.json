@@ -39,6 +39,7 @@
     "vue-clipboard2": "^0.3.0",
     "vue-context": "4.0.0",
     "vue-cookie": "^1.1.4",
+    "vue-cookies": "^1.7.4",
     "vue-echarts": "^4.0.3",
     "vue-feather-icons": "^5.0.0",
     "vue-flatpickr-component": "^8.1.2",
@@ -64,6 +65,7 @@
     "vuejs-datepicker": "^1.5.4",
     "vuesax": "jd-0001/vuesax",
     "vuex": "^3.1.1",
+    "vuex-persistedstate": "^4.0.0-beta.1",
     "xlsx": "^0.15.0"
   },
   "devDependencies": {
