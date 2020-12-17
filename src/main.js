@@ -55,8 +55,8 @@ import { VueHammer } from 'vue2-hammer'
 Vue.use(VueHammer)
 
 // vueCookie
-import VueCookie from 'vue-cookie'
-Vue.use(VueCookie)
+// import VueCookie from 'vue-cookie'
+// Vue.use(VueCookie)
 
 // PrismJS
 import 'prismjs'

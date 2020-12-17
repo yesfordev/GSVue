@@ -55,7 +55,8 @@ export default {
       this.status = "업데이트 중";
       await this.$http
         .get(`${process.env.VUE_APP_BASE_URL}/search/stat/update/${this.masterId}`, {
-          'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+          // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+          'headers': {'X-AUTH-TOKEN': sessionStorage.getItem('token')}
         })
           // `${url}/front/statisticSearch/area?masterId=${masterId}&itemName1=${itemName1}&startTime=${startTime}&endTime=${endTime})
         .then((res) => {
@@ -75,6 +76,7 @@ export default {
         this.status = "에러";
       }
 
+
       this.time = this.updateInfo.rec_dt;
     }
   },
@@ -87,7 +89,6 @@ export default {
     } else if (this.statusProps === 1) {
       this.status = "에러";
     }
-    console.log(this.status);
 
     //최근 갱신일
     if (!this.loaded) {

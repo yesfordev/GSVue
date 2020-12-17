@@ -28,7 +28,7 @@
                   <p>로그인 해주세요.</p>
                 </div>
 
-                <div>
+                <div v-on:keypress.enter="loginUser">
                   <vs-input
                       name="email"
                       icon-no-border
@@ -56,6 +56,13 @@
                   <div>
                     <vs-popup class="holamundo" title="로그인" :active.sync="popupActive">
                         <p> 없는 사용자이거나 비밀번호가 맞지 않습니다. </p>
+                    </vs-popup>
+                  </div>
+
+                  <div>
+                    <vs-popup class="holamundo" title="로그인" :active.sync="popupActive2">
+                        <p> 이메일 형식이 잘못 되었거나 비밀번호 형식이 잘못되었습니다.</p>
+                        <p>(비밀번호는 영어 대소문자와 숫자 및 특수기호가 1개 이상씩 포함된 8~20자의 비밀번호여야 합니다.) </p>
                     </vs-popup>
                   </div>
 
@@ -100,13 +107,12 @@ export default{
     return {
       email: "",
       password: "",
-      popupActive: false
-    }
+      popupActive: false,
+      popupActive2: false,
+      }
   },
   methods: {
     loginUser() {
-      console.log(this.email);
-      console.log(this.password);
       return this.$http
         .post(`${process.env.VUE_APP_BASE_URL}/login/login`,
             {
@@ -115,15 +121,18 @@ export default{
             }
         )
         .then((res) => {
-          // if(res.data.status) {
-          console.log("token: ", res.data.data);
-          this.$cookie.set('token', res.data.data);
+          // console.log(res);
           sessionStorage.setItem('token', res.data.data);
+              
           this.$router.push({path: '/', name: 'home'}).catch(() => {})
         })
         .catch((error) => { // 팝업 띄우기
           console.log(error);
-          this.popupActive = true;
+          if(error.response.status === 500) {
+            this.popupActive = true;
+          } else {
+            this.popupActive2 = true;
+          }
         });
     }
   }

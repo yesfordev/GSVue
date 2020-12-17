@@ -1,13 +1,13 @@
 
 <template lang="html">
 <div>
-    <div class="vx-row">
+    <!-- <div class="vx-row">
             <div class="vx-col w-full">
                 <div class="mt-8 flex flex-wrap items-center justify-end">
                     <vs-button class="ml-auto mt-2">Excel Download</vs-button>
                 </div>
             </div>
-        </div>
+        </div> -->
   <!-- 나라 있을 때 -->
   <div v-if="isArea">
     <vs-table stripe max-items="15" pagination :data="this.propsdata">

@@ -18,7 +18,7 @@ Vue.use(Router)
 
 const router = new Router({
   mode: "history",
-  펻base: process.env.VUE_APP_BASE_URL,
+  // base: process.env.VUE_APP_BASE_URL,
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
@@ -51,6 +51,7 @@ const router = new Router({
           name: "GDP",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -66,6 +67,7 @@ const router = new Router({
           name: "Real-GDP-Growth",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -81,6 +83,7 @@ const router = new Router({
           name: "Inflation",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -96,6 +99,7 @@ const router = new Router({
           name: "Private-Consumption-Growth",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -114,6 +118,7 @@ const router = new Router({
           name: "Exchange-Rate",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -162,6 +167,7 @@ const router = new Router({
           name: "Population",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -177,6 +183,7 @@ const router = new Router({
           name: "Unemployment",
           component: () => import("./views/datahub/koranbank/Koreanbank.vue"),
           meta: {
+            requiresAuth: true,
             breadcrumb: [
               { title: "Home", url: "/" },
               { title: "Data Hub" },
@@ -207,43 +214,52 @@ const router = new Router({
         {
           path: "/pages/error-404",
           name: "page-error-404",
-          component: () => import("@/views/pages/Error404.vue")
+          component: () => import("@/views/pages/Error404.vue"),
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
     // Redirect to 404 page, if no match found
     {
       path: "*",
-      redirect: "/pages/error-404"
+      redirect: "/pages/error-404",
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 });
 
-// router.beforeEach((to, from, next) => {
-//   if(to.matched.some(route => route.meta.requiresAuth)) {
-//     if(sessionStorage.getItem('token') !== null) {
-//       axios
-//         .get(`${process.env.VUE_APP_BASE_URL}/user/user`, {
-//           headers: { "X-AUTH-TOKEN": sessionStorage.getItem("token") }
-//         })
-//         .then(res => {
-//           console.log(res.data.data);
-//           // console.log(this.$store);
-//           // this.$store.commit("UPDATE_USER", res.data.data.name);
-//           next();
-//           // localStorage.setItem("user", res.data.data.name);
-//         })
-//         .catch(error => {
-//           // 팝업 띄우기
-//           console.log(error);
-//           next({path: '/pages/login'})
-//           // this.$router.push('/pages/login').catch(() => {});
-//         });
-//     } else {
-//       next({path: '/pages/login'});
-//     }
-//   }
-// })
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function(routeInfo) {
+    return routeInfo.meta.requiresAuth;
+  })) {
+    if(sessionStorage.getItem('token') !== null) {
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}/user/user`, {
+          headers: { "X-AUTH-TOKEN": sessionStorage.getItem("token") }
+        })
+        .then(res => {
+          sessionStorage.setItem("user", res.data.data.name);
+          sessionStorage.setItem("userEmail", res.data.data.userEmail);
+          next();
+        })
+        .catch(error => {
+          console.log(error);
+          sessionStorage.clear();
+          next({ path: "/pages/login" });
+        });
+    } else {
+      sessionStorage.clear();
+      next({ path: "/pages/login" });
+    }
+  } else {
+    // console.log("routing success: '" + to.path + "'");
+    next();
+  }
+})
 
 router.afterEach(() => {
   // Remove initial loading

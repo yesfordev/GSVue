@@ -33,7 +33,6 @@ export default {
     data: {
       deep: true,
       handler() {
-        console.log('propsdata changed');
         this.$data._chart.destroy()
         this.renderChart(this.data, this.options)
       }
@@ -41,7 +40,7 @@ export default {
     options: {
       deep: true,
       handler() {
-        console.log('options update');
+        // console.log('options update');
       }
     }
   }

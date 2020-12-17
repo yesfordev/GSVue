@@ -1,4 +1,5 @@
 <template>
+<div>
     <!-- <vx-card title="Overview"> -->
     <vx-card>
         <div>
@@ -45,6 +46,7 @@
                     <vs-button class="ml-4 mt-2" type="border" color="warning" @click="reset_data">Reset</vs-button> -->
                     <vs-button class="ml-auto mt-2" type="relief" v-on:click="search">Search</vs-button>
                     <vs-button class="ml-4 mt-2" type="relief" color="warning" v-on:click="reset">Reset</vs-button>
+                
 
                     <vs-popup class="holamundo" title="검색 조건 부족" :active.sync="popupActive">
                         <p> 검색 기간 또는 검색 조건을 입력해주세요</p>
@@ -54,6 +56,10 @@
         </div>
 
     </vx-card>
+    <div class="mt-8 flex flex-wrap items-center justify-end">
+        <vs-button class="ml-auto mt-2" type="relief" v-on:click="downloadExcel">검색 조건으로 Excel Download</vs-button>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -93,6 +99,10 @@ export default {
     props: {
         masterDetailResult: {
             default: null
+        },
+        masterId: {
+            type: String,
+            default: ""
         }
     },
     methods: {
@@ -109,12 +119,8 @@ export default {
               this.isArea = false;
           }
       },
-      search(e) {
-          //selected와 기간을 정하지 않으면 안된다는 문구가 뜨는 로직 추가
-        // console.log("fromMonth", this.fromMonth);
-        // console.log(this.selected.length);
-        // console.log(moment(this.fromYear).format('yyyyMM'));
-        if((this.selected.length === 0) && this.isArea) {
+      alertPopup() { //검색 조건 확인
+          if((this.selected.length === 0) && this.isArea) {
             return this.popupActive=true;
         } 
         
@@ -127,6 +133,9 @@ export default {
                 return this.popupActive=true;
             }
         }
+      },
+      search() {
+        this.alertPopup();
 
         let fromTime = '';
         let toTime = '';
@@ -154,15 +163,83 @@ export default {
           this.toMonth = null;
           this.fromYear = null;
           this.toYear = null;
+      },
+      downloadExcel() {
+          this.alertPopup();
+
+          let fromTime = '';
+          let toTime = '';
+
+          if(this.masterDetailResult.cycle === 'MM') {
+            fromTime = moment(this.fromMonth).format('yyyyMM');
+            toTime = moment(this.toMonth).format('yyyyMM');
+          } else if(this.masterDetailResult.cycle === 'QQ') {
+            fromTime = moment(this.fromMonth).format('yyyyQ');
+            toTime = moment(this.toMonth).format('yyyyQ');
+          } else if(this.masterDetailResult.cycle === 'YY') {
+            fromTime = moment(this.fromYear).format('yyyy');
+            toTime = moment(this.toYear).format('yyyy');
+          }
+        //   console.log(this.isArea);
+
+          if(this.isArea) {
+              let areaString = this.selected
+                        .join(',');
+                    return this
+                        .$http
+                        .get(
+                            `${process.env.VUE_APP_BASE_URL}/SearchData/export-csv?masterId=${this.masterId}&itemName1=${areaString}&startTime=${fromTime}&endTime=${toTime}`,
+                            {
+                                // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+                                'headers': {
+                                    'X-AUTH-TOKEN': sessionStorage.getItem('token')
+                                },
+                                responseType: 'blob'
+                            }
+                        )
+                        .then((response) => {
+                            const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.setAttribute('download', 'SearchData.csv');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+          } else {
+              return this
+                        .$http
+                        .get(
+                            `${process.env.VUE_APP_BASE_URL}/SearchData/export-csv?masterId=${this.masterId}&startTime=${fromTime}&endTime=${toTime}`,
+                            {
+                                // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
+                                'headers': {
+                                    'X-AUTH-TOKEN': sessionStorage.getItem('token')
+                                },
+                                responseType: 'blob'
+                            }
+                        )
+                        .then((response) => {
+                            const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.setAttribute('download', 'SearchData.csv');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+          }
+ 
       }
     },
     computed: {
         updateSelected() {
             return this.selected;
         },
-        // updateIsArea() {
-        //     return this.isArea;
-        // }
     },
     components: {
         'v-select': vSelect,
