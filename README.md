@@ -7,13 +7,13 @@ vue.js로 작성된 gs 뷰입니다.
 ### How do I get set up? ###
 
 ```bash
-git clone https://SeoYoungeun@bitbucket.org/wefunding-logistics/gs-front.git
+git clone https://github.com/yesfordev/internVue.git
 
-cd gs-front
+cd internVue
 
 npm install
 
-npm run serve
+npm run dev
 ```
 
 ### 진행 상황 ###
