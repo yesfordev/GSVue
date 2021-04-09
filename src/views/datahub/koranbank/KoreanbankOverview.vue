@@ -1,16 +1,11 @@
 <template>
-    <!-- <vx-card title="Overview"> -->
     <vx-card>
-        <!-- <p>지표에 관한 설명이 들어갈 자리입니다</p> -->
         <div v-html="this.masterDetailResult.description"></div>
 
         <br>
-        <!-- <koreanbank-update></koreanbank-update> -->
         <template>
           <vx-card title="갱신관리" no-shadow card-border>
           <vs-divider/>
-      <!-- chip -->
-          <!-- <vs-chip color="success"></vs-chip> -->
           <vs-chip v-if="status === '정상'" color="success"></vs-chip>
           <vs-chip v-else-if="status === '업데이트 중'" color="warning"></vs-chip>
           <vs-chip v-else-if="status === '에러'" color="danger"></vs-chip>
@@ -55,10 +50,8 @@ export default {
       this.status = "업데이트 중";
       await this.$http
         .get(`${process.env.VUE_APP_BASE_URL}/search/stat/update/${this.masterId}`, {
-          // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
           'headers': {'X-AUTH-TOKEN': sessionStorage.getItem('token')}
         })
-          // `${url}/front/statisticSearch/area?masterId=${masterId}&itemName1=${itemName1}&startTime=${startTime}&endTime=${endTime})
         .then((res) => {
           this.updateInfo = res.data;
         })

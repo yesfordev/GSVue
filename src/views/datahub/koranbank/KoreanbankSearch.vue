@@ -1,6 +1,5 @@
 <template>
 <div>
-    <!-- <vx-card title="Overview"> -->
     <vx-card>
         <div>
             <h5>주기: {{ cycle }}</h5>
@@ -35,15 +34,8 @@
             <v-select multiple :closeOnSelect="false" v-model="selected" :options="options" :dir="$vs.rtl ? 'rtl' : 'ltr'" /><br>
         </div>
 
-        <!-- <div class="demo-alignment vx-col w-full">
-            <vs-button class="ml-auto mt-2" color="primary" type="filled">검색</vs-button>
-        </div> -->
-        <!-- userEditTabAccount.vue -->
         <div class="vx-row">
             <div class="vx-col w-full">
-                <!-- <div class="mt-8 flex flex-wrap items-center justify-end">
-                    <vs-button class="ml-auto mt-2" @click="save_changes">Search</vs-button>
-                    <vs-button class="ml-4 mt-2" type="border" color="warning" @click="reset_data">Reset</vs-button> -->
                     <vs-button class="ml-auto mt-2" type="relief" v-on:click="search">Search</vs-button>
                     <vs-button class="ml-4 mt-2" type="relief" color="warning" v-on:click="reset">Reset</vs-button>
                 
@@ -51,7 +43,6 @@
                     <vs-popup class="holamundo" title="검색 조건 부족" :active.sync="popupActive">
                         <p> 검색 기간 또는 검색 조건을 입력해주세요</p>
                     </vs-popup>
-                <!-- </div> -->
             </div>
         </div>
 
@@ -72,8 +63,6 @@ import 'flatpickr/dist/flatpickr.css';
 export default {
     data () {
         return {
-            // selected: ['한국','중국'],
-            // options: ['한국','중국','일본','미국','캐나다','프랑스'],
             selected: [],
             options: [],
             cycle: [],
@@ -87,13 +76,6 @@ export default {
                 to: new Date(1949,12,31),
                 from: new Date()
             }
-            // configFromdateTimePicker: {
-            //     minDate: new Date(),
-            //     maxDate: null,
-            // },
-            // configTodateTimePicker: {
-            //     minDate: null
-            // }
         }
     },
     props: {
@@ -180,7 +162,6 @@ export default {
             fromTime = moment(this.fromYear).format('yyyy');
             toTime = moment(this.toYear).format('yyyy');
           }
-        //   console.log(this.isArea);
 
           if(this.isArea) {
               let areaString = this.selected
@@ -190,7 +171,6 @@ export default {
                         .get(
                             `${process.env.VUE_APP_BASE_URL}/SearchData/export-csv?masterId=${this.masterId}&itemName1=${areaString}&startTime=${fromTime}&endTime=${toTime}`,
                             {
-                                // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
                                 'headers': {
                                     'X-AUTH-TOKEN': sessionStorage.getItem('token')
                                 },
@@ -214,7 +194,6 @@ export default {
                         .get(
                             `${process.env.VUE_APP_BASE_URL}/SearchData/export-csv?masterId=${this.masterId}&startTime=${fromTime}&endTime=${toTime}`,
                             {
-                                // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
                                 'headers': {
                                     'X-AUTH-TOKEN': sessionStorage.getItem('token')
                                 },
@@ -249,13 +228,6 @@ export default {
     mounted () {
         //나라 존재 여부
         this.checkIsArea();
-        // if(this.masterDetailResult.isArea === true) {
-        //     this.isArea = true
-        // }
-        // console.log("isArea: ", this.isArea);
-
-        //나라
-        // if(this.isArea) {
         if(this.masterDetailResult.isArea) {
             this.options = this.masterDetailResult.area;
         }

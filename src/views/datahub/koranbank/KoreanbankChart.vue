@@ -1,7 +1,6 @@
 
 
 <script>
-// import ChartjsComponentLineChart from './components/ChartjsComponentLineChart.vue'
 import { Line } from 'vue-chartjs'
 
 export default {
@@ -16,13 +15,6 @@ export default {
       default: null
     }
   },
-  // props: ['propsdata']
-    // propsdata: {
-    //   default: []
-    // },
-    // statName: {
-    //   default: ""
-    // }
   data: () => ({
     
   }),
@@ -40,7 +32,6 @@ export default {
     options: {
       deep: true,
       handler() {
-        // console.log('options update');
       }
     }
   }

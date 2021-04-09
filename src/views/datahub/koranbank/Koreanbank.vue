@@ -1,6 +1,5 @@
 <template>
     <div id="vuexy-grid-demo">
-        <!-- <div class="vx-row"> -->
         <koreanbank-overview
             v-bind:masterDetailResult="masterDetailResult[0]"
             v-bind:statusProps="masterDetailResult[0].status"
@@ -16,15 +15,11 @@
             v-bind:isArea="masterDetailResult[0].isArea"
             v-bind:cycle="masterDetailResult[0].cycle"></koreanbank-table>
         <br/><br/>
-        <!-- <koreanbank-chart v-if="loaded" v-bind:data="data"></koreanbank-chart> -->
         <vx-card class="mb-base" v-if="loaded" code-toggler="code-toggler">
             <div class="mt-5">
-                <!-- <chartjs-component-line-chart :height="250" v-bind:data="this.propsdata"
-                v-bind:options="options"></chartjs-component-line-chart> -->
                 <koreanbank-chart :height="200" v-bind:data="data" v-bind:options="options"></koreanbank-chart>
             </div>
         </vx-card>
-        <!-- </div> -->
     </div>
 </template>
 
@@ -86,7 +81,6 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                // labelString: [],
                                 fontColor: "black"
                             }
                         }
@@ -232,7 +226,6 @@
                         .get(
                             `${process.env.VUE_APP_BASE_URL}/front/statisticSearch/chart/multipleArea?cycle=${this.masterDetailResult[0].cycle}&masterId=${this.masterId}&itemName1=${areaString}&startTime=${info.fromTime}&endTime=${info.toTime}`,
                             {
-                                // 'headers': {'X-AUTH-TOKEN': this.$cookie.get('token')}
                                 'headers': {
                                     'X-AUTH-TOKEN': sessionStorage.getItem('token')
                                 }

@@ -1,21 +1,10 @@
 
 <template lang="html">
 <div>
-    <!-- <div class="vx-row">
-            <div class="vx-col w-full">
-                <div class="mt-8 flex flex-wrap items-center justify-end">
-                    <vs-button class="ml-auto mt-2">Excel Download</vs-button>
-                </div>
-            </div>
-        </div> -->
   <!-- 나라 있을 때 -->
   <div v-if="isArea">
     <vs-table stripe max-items="15" pagination :data="this.propsdata">
-      <!-- <template slot="header">
-        <h3>
-          GDP
-        </h3>
-      </template> -->
+ 
       <template slot="thead">
         <vs-th>No.</vs-th>
         <vs-th>Area</vs-th>
@@ -48,11 +37,6 @@
   <!-- 나라 조건 없을 때 -->
   <div v-else>
     <vs-table stripe max-items="10" pagination :data="this.propsdata">
-      <!-- <template slot="header">
-        <h3>
-          GDP
-        </h3>
-      </template> -->
       <template slot="thead">
         <vs-th>No.</vs-th>
         <vs-th>Time</vs-th>
