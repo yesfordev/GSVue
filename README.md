@@ -44,7 +44,6 @@
 - [영상 보기](https://drive.google.com/file/d/1VWlOacV6I20sT_pwZulMv4orVeQYXdVY/view?usp=sharing)
 
 </br>
----
 
 # How to start #
 
