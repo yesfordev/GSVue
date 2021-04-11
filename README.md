@@ -40,6 +40,12 @@
 - 화면 설계 및 구성
 </br>
 
+### 배포
+
+- AWS EC2 - Front Nginx 이용하여 배포
+
+</br>
+
 ### 🎥시연 영상
 - [영상 보기](https://drive.google.com/file/d/1VWlOacV6I20sT_pwZulMv4orVeQYXdVY/view?usp=sharing)
 
